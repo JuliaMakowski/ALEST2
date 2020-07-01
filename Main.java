@@ -5,19 +5,33 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.SQLOutput;
 import java.util.LinkedList;
 
+import java.util.Scanner;
 
 public class Main {
     public static void main(String [] args){
-        leituraArquivo();
+        Scanner in = new Scanner(System.in);
+        String letras= "";
+        do {
+            System.out.println("Digite as letras iniciais: (Não maior que 3 letras)");
+            letras = in.next();
+        }while (letras.length()-1>2);
+        arvore(letras);
+    }
+
+    public static void arvore(String letras){
+        LinkedList<Palavra> dicionario = leituraArquivo();
+        GeneralTree tree = new GeneralTree();
+        char[] letra = letras.toCharArray();
+
 
     }
 
-    public static void leituraArquivo(){
-        String linhas[] = new String[1000];
+    public static LinkedList<Palavra> leituraArquivo(){
         LinkedList<Palavra> lista = new LinkedList<>();
-        String aux[];
+        String[] aux;
 
         Path path1 = Paths.get("nomes.csv");
 
@@ -31,5 +45,6 @@ public class Main {
         } catch (IOException e) {
             System.err.format("Erro na leitura do arquivo: ", e);
         }
+        return lista;
     }
 }

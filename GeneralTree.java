@@ -1,12 +1,11 @@
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
-import java.util.Queue;
 
 public class GeneralTree {
 
     // Classe interna Node
-    private class Node {
+    private static class Node {
         // Atributos da classe Node
         public Node father;
         public Character element;
@@ -22,9 +21,9 @@ public class GeneralTree {
             n.father = this;
             subtrees.add(n);
         }
-        private boolean removeSubtree(Node n) {
+        private void removeSubtree(Node n) {
             n.father = null;
-            return subtrees.remove(n);
+            subtrees.remove(n);
         }
         public Node getSubtree(int i) {
             if ((i < 0) || (i >= subtrees.size())) {
@@ -37,14 +36,10 @@ public class GeneralTree {
         }
     }
 
-    
-    
-    // Atributos da classe GeneralTreeOfInteger
+
     private Node root;
     private int count;
 
-    
-    // Metodos da classe GeneralTreeOfInteger
     
     public GeneralTree() {
         root = null;
@@ -104,8 +99,8 @@ public class GeneralTree {
     }
     
     
-    // Retorna uma lista com todos os elementos da árvore numa ordem de 
-//    // caminhamento em largura
+//     Retorna uma lista com todos os elementos da árvore numa ordem de
+    // caminhamento em largura
 //    public LinkedList<Integer> positionsWidth() {
 //        LinkedList<Integer> lista = new LinkedList<>();
 //
@@ -127,12 +122,12 @@ public class GeneralTree {
     
     // Retorna uma lista com todos os elementos da árvore numa ordem de 
     // caminhamento pré-fixado
-    public LinkedList<Integer> positionsPre() {  
-        LinkedList<Integer> lista = new LinkedList<>();
+    public LinkedList<Character> positionsPre() {
+        LinkedList<Character> lista = new LinkedList<>();
         positionsPreAux(root,lista);
         return lista;
     }  
-    private void positionsPreAux(Node n, LinkedList<Integer> lista) { // recursao
+    private void positionsPreAux(Node n, LinkedList<Character> lista) { // recursao
         if (n != null) {
             lista.add(n.element);
             for (int i=0; i<n.getSubtreesSize(); i++) {
@@ -143,12 +138,12 @@ public class GeneralTree {
 
     // Retorna uma lista com todos os elementos da árvore numa ordem de 
     // caminhamento pós-fixado
-    public LinkedList<Integer> positionsPos() {  
-        LinkedList<Integer> lista = new LinkedList<>();
+    public LinkedList<Character> positionsPos() {
+        LinkedList<Character> lista = new LinkedList<>();
         positionsPosAux(root,lista);
         return lista;
     }  
-    private void positionsPosAux(Node n, LinkedList<Integer> lista) {
+    private void positionsPosAux(Node n, LinkedList<Character> lista) {
         if (n != null) {
             for (int i=0; i<n.getSubtreesSize(); i++) {
                 positionsPosAux(n.getSubtree(i),lista);
@@ -158,7 +153,7 @@ public class GeneralTree {
     }    
     
     // Retorna em que nível o elemento está 
-    public int level(Integer element) {
+    public int level(Character element) {
         
         Node n = searchNodeRef(element, root);
         
@@ -175,7 +170,7 @@ public class GeneralTree {
     }     
     
     // Remove um galho da arvore. Retorna true se houve remocao.
-    public boolean removeBranch(Integer element) { 
+    public boolean removeBranch(Character element) {
         if (root == null) // se a arvore estiver vazia
             return false;
         
@@ -215,7 +210,7 @@ public class GeneralTree {
     }
 
     // Retorna true se element esta armazenado em um nodo folha
-    public boolean isExternal(Integer element) {
+    public boolean isExternal(Character element) {
         Node n = searchNodeRef(element, root);
         if (n==null)
             return false;
