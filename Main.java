@@ -32,18 +32,25 @@ public class Main {
             String line = null;
             while ((line = reader.readLine()) != null) {
                 aux = line.split(";");
-                if (iniciaisCorrespondem(aux[0],letraInicial)){
-
+                if (iniciaisCorrespondem(aux[0].toLowerCase(),letraInicial)){
+                    lista.addWord(aux[0].toLowerCase(),aux[1]);
                 }
             }
         } catch (IOException e) {
             System.err.format("Erro na leitura do arquivo: ", e);
         }
 
-        LinkedList<Character> list= lista.positionsWidth();
-        for (char c : list){
-            System.out.print(c);
-        }
+        System.out.println("Caminhamento em largura:");
+        System.out.println(lista.positionsWidth());
+
+        System.out.println("Caminhamento pré-fixado:");
+        System.out.println(lista.positionsPre());
+
+        System.out.println("Caminhamento pós-fixado:");
+        System.out.println(lista.positionsPos());
+
+        System.out.println("Maior numero de filhos");
+        System.out.println(lista.getMaxChildren());
     }
     public static boolean iniciaisCorrespondem(String palavra, char [] letras){
         for(int i =0 ; i<letras.length-1; i++){

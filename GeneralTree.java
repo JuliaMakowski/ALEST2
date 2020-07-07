@@ -108,13 +108,31 @@ public class GeneralTree {
             totalWords++;
         }
         else {
+            if (palavra.charAt(0)==root.element){
+                Node aux = findWord(palavra);
+                for (int i=0; i<palavra.length()-1; i++){
+                    if (i==0) add(palavra.charAt(0),aux.element);
+                    if (i!=0) add(palavra.charAt(i),palavra.charAt(i-1));
+                    if (i==palavra.length()-1) addSignificado(palavra.charAt(i),palavra.charAt(i-1),significado);
+                }
+                totalWords++;
+            }
+
 
         }
 
     }
 
     private Node findWord(String word){
-
+        char [] palavra = word.toCharArray();
+        Node current = root;
+        Node aux = root;
+        for (int i = 1; i<current.getSubtreesSize();i++){
+            if (current.getSubtree(i).element!=palavra[i]) break;
+            aux = current.getSubtree(i);
+            i++;
+        }
+        return aux;
     }
 
     private void addSignificado(Character elem, Character father, String significado){
