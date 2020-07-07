@@ -103,7 +103,7 @@ public class GeneralTree {
         return false; // caso nao encontre o pai na arvore
     }
 
-    public boolean add(String elem, Character father) {
+    public boolean addL(String elem, Character father) {
         Node n = new Node(father);
         Node aux = searchNodeRef(father,root);
         if (aux != null) {

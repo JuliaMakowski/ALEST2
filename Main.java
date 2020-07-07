@@ -26,6 +26,7 @@ public class Main {
         char [] letraInicial = letras.toCharArray();
         String[] aux;
         Path path1 = Paths.get("nomes.csv");
+        boolean primeiraPalavra =true;
 
         try (BufferedReader reader = Files.newBufferedReader(path1, Charset.defaultCharset())) {
             String line = null;
@@ -34,18 +35,11 @@ public class Main {
                 if (iniciaisCorrespondem(aux[0],letraInicial)){
                     Palavra p = new Palavra(aux[0],aux[1]);
                     for (int i=0; i<p.getPalavra().length()-1; i++){
-                        if (i==0) lista.add(aux[0].charAt(0),null);
-                        else lista.add(aux[0].charAt(i),aux[0].charAt(i-1));
+                        if (i==0 && !primeiraPalavra) lista.add(aux[0].charAt(0),letraInicial[0]);
+                        if (i==0 && primeiraPalavra) lista.add(aux[0].charAt(0),null);
+                        if (i!=0) lista.add(aux[0].charAt(i),aux[0].charAt(i-1));
                     }
-
-
-//                    TrieNode current = root;
-//
-//                    for (char l : word.toCharArray()) {
-//                        current = current.getChildren().computeIfAbsent(l, c -> new TrieNode());
-//                    }
-//                    current.setEndOfWord(true);
-
+                    primeiraPalavra = false;
                 }
             }
         } catch (IOException e) {
