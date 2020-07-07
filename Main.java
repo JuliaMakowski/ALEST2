@@ -15,9 +15,9 @@ public class Main {
         Scanner in = new Scanner(System.in);
         String letras= "";
         do {
-            System.out.println("Digite as letras iniciais: (Não maior que 3 letras)");
+            System.out.println("Digite as letras iniciais: (Entre 2 a 3 letras)");
             letras = in.next();
-        }while (letras.length()-1>2);
+        }while (letras.length()-1>2 ||letras.length()-1<1);
         leituraArquivo(letras);
     }
 
