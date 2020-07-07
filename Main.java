@@ -25,7 +25,6 @@ public class Main {
     public static void leituraArquivo(String letras){
         char [] letraInicial = letras.toCharArray();
         String[] aux;
-        char [] auxi;
         Path path1 = Paths.get("nomes.csv");
 
         try (BufferedReader reader = Files.newBufferedReader(path1, Charset.defaultCharset())) {
@@ -34,8 +33,11 @@ public class Main {
                 aux = line.split(";");
                 if (iniciaisCorrespondem(aux[0],letraInicial)){
                     Palavra p = new Palavra(aux[0],aux[1]);
-                    auxi = p.getPalavra().toCharArray();
-                    for (char )
+                    for (int i=0; i<p.getPalavra().length()-1; i++){
+                        if (i==0) lista.add(aux[0].charAt(0),null);
+                        else lista.add(aux[0].charAt(i),aux[0].charAt(i-1));
+                    }
+
 
 //                    TrieNode current = root;
 //
@@ -48,6 +50,11 @@ public class Main {
             }
         } catch (IOException e) {
             System.err.format("Erro na leitura do arquivo: ", e);
+        }
+
+        LinkedList<Character> list= lista.positionsWidth();
+        for (char c : list){
+            System.out.print(c);
         }
     }
 

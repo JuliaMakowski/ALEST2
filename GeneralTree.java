@@ -1,6 +1,8 @@
 
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
+import java.util.Queue;
+import java.util.Stack;
 
 public class GeneralTree {
 
@@ -64,10 +66,16 @@ public class GeneralTree {
         }
     }
 
+    private boolean fimDaPalavra=false;
+
     private String significado="";
 
     public void setSignificado(String significado){
         this.significado=significado;
+    }
+
+    private void setFimDaPalavra(){
+        this.fimDaPalavra = true;
     }
 
     public boolean add(Character elem, Character father) {
@@ -94,7 +102,21 @@ public class GeneralTree {
         
         return false; // caso nao encontre o pai na arvore
     }
-    
+
+    public boolean add(String elem, Character father) {
+        Node n = new Node(father);
+        Node aux = searchNodeRef(father,root);
+        if (aux != null) {
+            aux.addSubtree(n);
+            n.father = aux;
+            count++;
+            return true;
+        }
+
+        return false;
+
+    }
+
     public boolean contains(Character elem) {
         Node aux = searchNodeRef(elem, root);
         if(aux == null)
@@ -102,28 +124,29 @@ public class GeneralTree {
         else
             return true;
     }
-    
-    
+
+
 //     Retorna uma lista com todos os elementos da árvore numa ordem de
     // caminhamento em largura
-//    public LinkedList<Integer> positionsWidth() {
-//        LinkedList<Integer> lista = new LinkedList<>();
-//
-//        Queue<Node> fila = new Queue<>();
-//        if (root != null) {
-//            fila.enqueue(root); // coloca a raiz na fila
-//            while (!fila.isEmpty()) {
-//                Node aux = fila.dequeue();
-//                lista.add(aux.element); // coloca o elemento na lista
-//                // coloca os filhos na fila
-//                for(int i=0; i<aux.getSubtreesSize(); i++) {
-//                    fila.enqueue(aux.getSubtree(i));
-//                }
-//            }
-//        }
-//
-//        return lista;
-//    }
+    public LinkedList<Character> positionsWidth() {
+        LinkedList<Character> lista = new LinkedList<>();
+
+        Stack<Node> fila = new Stack<>();
+        if (root != null) {
+            fila.push(root); // coloca a raiz na fila
+            while (!fila.isEmpty()) {
+                Node aux = fila.pop();
+                lista.add(aux.element); // coloca o elemento na lista
+                // coloca os filhos na fila
+                for(int i=0; i<aux.getSubtreesSize(); i++) {
+                    fila.push(aux.getSubtree(i));
+                }
+            }
+        }
+
+        return lista;
+    }
+
     
     // Retorna uma lista com todos os elementos da árvore numa ordem de 
     // caminhamento pré-fixado
