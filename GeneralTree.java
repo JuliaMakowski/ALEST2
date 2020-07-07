@@ -36,7 +36,6 @@ public class GeneralTree {
         }
     }
 
-
     private Node root;
     private int count;
 
@@ -64,7 +63,13 @@ public class GeneralTree {
             return aux;
         }
     }
-    
+
+    private String significado="";
+
+    public void setSignificado(String significado){
+        this.significado=significado;
+    }
+
     public boolean add(Character elem, Character father) {
         Node n = new Node(elem);
         
