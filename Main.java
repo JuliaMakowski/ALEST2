@@ -51,6 +51,7 @@ public class Main {
             System.out.print(c);
         }
     }
+    chama a arvore(String significado, char[] letrinhas);
 
     public static boolean iniciaisCorrespondem(String palavra, char [] letras){
         for(int i =0 ; i<letras.length-1; i++){
