@@ -17,7 +17,7 @@ public class Main {
         do {
             System.out.println("Digite as letras iniciais: (Entre 2 a 3 letras)");
             letras = in.next();
-        }while (letras.length()-1>2 ||letras.length()-1<1);
+        }while (letras.length()-1>2 || letras.length()-1<1);
         leituraArquivo(letras);
     }
 
