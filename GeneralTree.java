@@ -96,7 +96,7 @@ public class GeneralTree {
         this.fimDaPalavra = true;
     }
 
-    public void addAux(String palavra, String significado){
+    public void addWord(String palavra, String significado){
         Node current = root;
         if (current==null){
             for (int i=0; i<palavra.length()-1; i++){
@@ -106,13 +106,18 @@ public class GeneralTree {
                 if (i==palavra.length()-1) addSignificado(palavra.charAt(i),palavra.charAt(i-1),significado);
             }
             totalWords++;
-        } else {
+        }
+        else {
 
         }
 
     }
 
-    public void addSignificado(Character elem, Character father, String significado){
+    private Node findWord(String word){
+
+    }
+
+    private void addSignificado(Character elem, Character father, String significado){
         Node n = new Node (elem);
         Node aux = searchNodeRef(father, root);//vai procurar o pai começando pela RAIZ
         if(aux != null){ //se encontrou o pai
@@ -158,19 +163,19 @@ public class GeneralTree {
 
 
 //     Retorna uma lista com todos os elementos da árvore numa ordem de
-    // caminhamento em largura
+// caminhamento em largura
     public LinkedList<Character> positionsWidth() {
         LinkedList<Character> lista = new LinkedList<>();
 
-        Stack<Node> fila = new Stack<>();
+        Queue<Node> fila = new Queue<>();
         if (root != null) {
-            fila.push(root); // coloca a raiz na fila
+            fila.enqueue(root); // coloca a raiz na fila
             while (!fila.isEmpty()) {
-                Node aux = fila.pop();
+                Node aux = fila.dequeue();
                 lista.add(aux.element); // coloca o elemento na lista
                 // coloca os filhos na fila
                 for(int i=0; i<aux.getSubtreesSize(); i++) {
-                    fila.push(aux.getSubtree(i));
+                    fila.enqueue(aux.getSubtree(i));
                 }
             }
         }
