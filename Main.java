@@ -33,13 +33,7 @@ public class Main {
             while ((line = reader.readLine()) != null) {
                 aux = line.split(";");
                 if (iniciaisCorrespondem(aux[0],letraInicial)){
-                    Palavra p = new Palavra(aux[0],aux[1]);
-                    for (int i=0; i<p.getPalavra().length()-1; i++){
-                        if (i==0 && !primeiraPalavra) lista.add(aux[0].charAt(0),letraInicial[0]);
-                        if (i==0 && primeiraPalavra) lista.add(aux[0].charAt(0),null);
-                        if (i!=0) lista.add(aux[0].charAt(i),aux[0].charAt(i-1));
-                    }
-                    primeiraPalavra = false;
+
                 }
             }
         } catch (IOException e) {
@@ -51,8 +45,6 @@ public class Main {
             System.out.print(c);
         }
     }
-    chama a arvore(String significado, char[] letrinhas);
-
     public static boolean iniciaisCorrespondem(String palavra, char [] letras){
         for(int i =0 ; i<letras.length-1; i++){
             if (palavra.charAt(i)!=letras[i]) return false;

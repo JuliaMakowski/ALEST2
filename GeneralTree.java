@@ -7,11 +7,10 @@ public class GeneralTree {
 
     // Classe interna Node
     private static class Node {
-        // Atributos da classe Node
         public Node father;
         public Character element;
         public LinkedList<Node> subtrees;
-        public boolean finalLetter;
+        public boolean finalLetter = false;
         public String significado;
 
         // Métodos da classe Node
@@ -39,11 +38,27 @@ public class GeneralTree {
         public int getSubtreesSize() {
             return subtrees.size();
         }
+
+        public boolean isFinalLetter() {
+            return finalLetter;
+        }
+
+        public void setFinalLetterTrue(){
+            this.finalLetter = true;
+        }
+
+        public void setSignificado(String sig){
+            this.significado = sig;
+        }
+
+        public String getSignificado(){
+            return this.significado;
+        }
     }
 
     private Node root;
     private int count;
-
+    private int totalWords;
     
     public GeneralTree() {
         root = null;
@@ -81,35 +96,55 @@ public class GeneralTree {
         this.fimDaPalavra = true;
     }
 
-    public boolean addAux(char[] letras, String significado){
+    public void addAux(String palavra, String significado){
+        Node current = root;
+        if (current==null){
+            for (int i=0; i<palavra.length()-1; i++){
+                if (i==0 && current!=null) add(palavra.charAt(0),current.element);
+                if (i==0 && current==null) add(palavra.charAt(0),null);
+                if (i!=0) add(palavra.charAt(i),palavra.charAt(i-1));
+                if (i==palavra.length()-1) addSignificado(palavra.charAt(i),palavra.charAt(i-1),significado);
+            }
+            totalWords++;
+        } else {
+
+        }
 
     }
 
-    public boolean add(Character elem) {
+    public void addSignificado(Character elem, Character father, String significado){
+        Node n = new Node (elem);
+        Node aux = searchNodeRef(father, root);//vai procurar o pai começando pela RAIZ
+        if(aux != null){ //se encontrou o pai
+            aux.addSubtree(n); // adiciona N como galho do Father
+            n.father = aux; //faz o n apontar pro pai Father
+            count++;
+        }
+        n.setFinalLetterTrue();
+        n.setSignificado(significado);
+    }
+
+    public boolean add(Character elem, Character father) {
         Node n = new Node(elem);
-
-        if( root != null ) { // se a arvore nao estava vazia
-            n.addSubtree(root);
-            root.father = n;
-
-            root = n;
+        if(father == null){
+            if(root != null){
+                n.addSubtree(root);
+                root.father = n;
+            }
+            root = n; //faz o N ser a raíz da arvore toda
             count++;
             return true;
         }
-        else {
-            Node aux = searchNodeRef(elem,root);
-            if (aux != null) { // se encontrou o primeiro
-                aux.addSubtree(n);
-                n.father = aux;
+        else{
+            Node aux = searchNodeRef(father, root);//vai procurar o pai começando pela RAIZ
+            if(aux != null){ //se encontrou o pai
+                aux.addSubtree(n); // adiciona N como galho do Father
+                n.father = aux; //faz o n apontar pro pai Father
                 count++;
                 return true;
-            }else{
-
             }
-
         }
-        
-        return false; // caso nao encontre o pai na arvore
+        return false;
     }
 
 
@@ -251,7 +286,19 @@ public class GeneralTree {
     }
     
     private int getMaxChildren(Node n, int numFilhos) {
-        // Implemente este metodo
+        if(n != null){
+            int maior = n.getSubtreesSize(); //primeiro vai pegar o numero de filhos da raiz
+
+            for(int i = 0; i < n.getSubtreesSize(); i++){ //então vai percorrer os filhos
+                numFilhos = getMaxChildren(n.getSubtree(i), numFilhos); //os filhos vão trazer o maior numero de filhos entre eles
+            }
+
+            if(maior > numFilhos){ //se o numero de filhos da raiz for maior que o numero de filhos encontrado nos filhos, numFilhos = o numero de filhos da raiz
+                numFilhos = maior;
+            }
+            return numFilhos;
+
+        }
         return 0;
     }
 }
