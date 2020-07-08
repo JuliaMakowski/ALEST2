@@ -111,7 +111,7 @@ public class GeneralTree {
             int i = aux.getWord().length();
             char [] palavra = word.toCharArray();
             CharNode aux1 = aux;
-            for(;i< palavra.length;i++){
+            for(;i< palavra.length && aux!=null;i++){
                 if(i==palavra.length-1){
                     aux = aux.addChild(palavra[i],significado);
                     aux.father = aux1;
@@ -125,7 +125,7 @@ public class GeneralTree {
         }else{
             char [] palavra = word.toCharArray();
             CharNode aux1 = aux;
-            for(int i=1;i< palavra.length;i++){
+            for(int i=1;i< palavra.length && aux!=null;i++){
                 if(i==palavra.length-1){
                     aux = aux.addChild(palavra[i],significado);
                     aux.father = aux1;
@@ -133,7 +133,6 @@ public class GeneralTree {
                     aux = aux.addChild(palavra[i]);
                     aux.father = aux1;
                     aux1 = aux;
-
                 }
                 totalNodes++;
             }
@@ -183,18 +182,22 @@ public class GeneralTree {
      * @param prefix
      */
     public ArrayList<Palavra> searchAll(String prefix) {
-        ArrayList<Palavra> ListaDePalavras = new ArrayList<>();
+        ArrayList<Palavra> list = new ArrayList<>();
         CharNode aux = findCharNodeForWord(prefix);
-        if(aux == null){return null;}
-        else{
-            searchAllAux(aux,ListaDePalavras);
+        if(aux == null){
+            return null;
         }
-        return ListaDePalavras;
+        else{
+            searchAllAux(aux,list);
+        }
+        return list;
     }
 
     private void searchAllAux(CharNode aux, ArrayList<Palavra> lista){
         if(aux != null){
-            if(aux.isFinal == true){lista.add(new Palavra(aux.getWord(),aux.significado));}
+            if(aux.isFinal){
+                lista.add(new Palavra(aux.getWord(),aux.significado));
+            }
             for(int i=0;i<aux.getNumberOfChildren();i++){
                 searchAllAux(aux.getChild(i),lista);
             }
