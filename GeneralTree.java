@@ -151,7 +151,7 @@ public class GeneralTree {
         Node current = root;
         Node aux= new Node('-');
         ArrayList<Node> isFinal = new ArrayList<>();
-        while (current!=null){
+        while (current.getSubtreesSize()!=0){
             for (int i=0; i<current.getSubtreesSize(); i++){
                 aux = current.getSubtree(i);
                 if (aux.isFinalLetter()) isFinal.add(aux);
