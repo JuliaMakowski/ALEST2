@@ -12,6 +12,14 @@ public class Palavra {
         return palavra;
     }
 
+    public void setPalavra(String palavra) {
+        this.palavra = palavra;
+    }
+
+    public void setSignificado(String significado) {
+        this.significado = significado;
+    }
+
     public String getSignificado() {
         return significado;
     }

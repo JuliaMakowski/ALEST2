@@ -5,7 +5,6 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.LinkedList;
 
 import java.util.Scanner;
 
@@ -49,11 +48,11 @@ public class Main {
         System.out.println("Caminhamento pós-fixado:");
         System.out.println(lista.positionsPos());
 
-        System.out.println("Maior numero de filhos");
-        System.out.println(lista.getMaxChildren());
+        System.out.println("to str");
+        System.out.println(lista.toString());
     }
     public static boolean iniciaisCorrespondem(String palavra, char [] letras){
-        for(int i =0 ; i<letras.length-1; i++){
+        for(int i =0 ; i<letras.length; i++){
             if (palavra.charAt(i)!=letras[i]) return false;
         }
         return true;
