@@ -1,5 +1,6 @@
 
 import javax.print.DocFlavor;
+import javax.print.attribute.standard.NumberOfDocuments;
 import java.awt.*;
 import java.util.*;
 import java.util.List;
@@ -117,18 +118,17 @@ public class GeneralTree {
         Node current = root;
         if (current==null){
             for (int i=0; i<palavra.length(); i++){
-                if (i==0 && current==null) add(palavra.charAt(0),null);
-                if (i!=0) add(palavra.charAt(i),palavra.charAt(i-1));
-                if (i==palavra.length()-1) addSignificado(palavra.charAt(i),palavra.charAt(i-1),significado);
+                if (i!=0) current = add(palavra.charAt(i),current);
+                if (i==palavra.length()-1) addSignificado(palavra.charAt(i),current,significado);
             }
             totalWords++;
         }
         else {
             Node aux = findWord(palavra);
-            for (int i=0; i<palavra.length()-1; i++){
-                if (i==0) add(palavra.charAt(0),aux.element);
-                if (i!=0) add(palavra.charAt(i),palavra.charAt(i-1));
-                if (i==palavra.length()-1) addSignificado(palavra.charAt(i),palavra.charAt(i-1),significado);
+            for (int i=0; i<palavra.length(); i++){
+                if (i==0) current = add(palavra.charAt(0),aux);
+                if (i!=0) current = add(palavra.charAt(i),current);
+                if (i==palavra.length()-1) addSignificado(palavra.charAt(i),current,significado);
             }
             totalWords++;
         }
@@ -158,13 +158,14 @@ public class GeneralTree {
             }
             current=aux;
         }
-
+        String palavra = "";
         ArrayList<Palavra> word = new ArrayList<>();
         for (Node node : isFinal){
             word.add(new Palavra(node.getWord(),node.getSignificado()));
+            palavra+=node.getWord();
         }
 
-        String palavra = "";
+
 
         for (Palavra p : word){
             palavra += p.getPalavra() +"\n";
@@ -173,9 +174,9 @@ public class GeneralTree {
         return palavra;
     }
 
-    private void addSignificado(Character elem, Character father, String significado){
+    private void addSignificado(Character elem, Node father, String significado){
         Node n = new Node (elem);
-        Node aux = searchNodeRef(father, root);//vai procurar o pai começando pela RAIZ
+        Node aux = searchNodeRef(father.element, root);//vai procurar o pai começando pela RAIZ
         if(aux != null){ //se encontrou o pai
             aux.addSubtree(n); // adiciona N como galho do Father
             n.father = aux; //faz o n apontar pro pai Father
@@ -186,7 +187,7 @@ public class GeneralTree {
 
     }
 
-    public boolean add(Character elem, Character father) {
+    public Node add(Character elem, Node father) {
         Node n = new Node(elem);
         if(father == null){
             if(root != null){
@@ -195,18 +196,17 @@ public class GeneralTree {
             }
             root = n; //faz o N ser a raíz da arvore toda
             count++;
-            return true;
+            return n;
         }
         else{
-            Node aux = searchNodeRef(father, root);//vai procurar o pai começando pela RAIZ
-            if(aux != null){ //se encontrou o pai
-                aux.addSubtree(n); // adiciona N como galho do Father
-                n.father = aux; //faz o n apontar pro pai Father
-                count++;
-                return true;
-            }
+            Node aux = father;//vai procurar o pai começando pela RAIZ
+            aux.addSubtree(n); // adiciona N como galho do Father
+            n.father = aux; //faz o n apontar pro pai Father
+            count++;
+            return n;
+
         }
-        return false;
+
     }
 
 
