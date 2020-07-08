@@ -61,7 +61,7 @@ public class GeneralTree {
             Node aux = father;
             Stack<Character> pilha = new Stack<>();
             pilha.push(element);
-            while (aux!=null){
+            while (aux.father!=null){
                 pilha.push(aux.element);
                 aux = aux.father;
             }
@@ -81,6 +81,7 @@ public class GeneralTree {
     public GeneralTree() {
         root = new Node('-');
         count = 0;
+        totalWords=0;
     }
 
     
@@ -103,9 +104,10 @@ public class GeneralTree {
     }
 
     public void addWord(String palavra, String significado){
-        Node current = root;
-        if (current==root){
+        Node current = new Node(null);
+        if (totalWords==0){
             for (int i=0; i<palavra.length(); i++){
+                if (i==0) current = add(palavra.charAt(0),current);
                 if (i!=0) current = add(palavra.charAt(i),current);
                 if (i==palavra.length()-1) addSignificado(palavra.charAt(i),current,significado);
             }
@@ -125,75 +127,45 @@ public class GeneralTree {
 
     }
 
+
+    private  void searchAllAux(Node node ,ArrayList<Palavra> palavras) {
+
+        if (node!=null){
+            if (node.isFinalLetter()) palavras.add(new Palavra(node.getWord(),node.getSignificado()));
+            for (int i=0; i<node.getSubtreesSize(); i++) {
+                searchAllAux(node.getSubtree(i),palavras);
+            }
+        }
+    }
     public ArrayList<Palavra> searchAll(String prefix) {
         ArrayList<Palavra> palavra = new ArrayList<>();
-        char [] aux = prefix.toCharArray();
-        Node current = root;
-        boolean find = false;
-        while (!find){
-            for (int j=0; j<aux.length;j++){
-                for (int i=0; i<current.getSubtreesSize(); i++){
-                    if (current.getSubtree(i).element==aux[j]){
-                        current=current.getSubtree(i);
-                        find=true;
-                        break;
-                    }
-                }
-            }
-        }
-        Node aux1 = new Node('-');
-        ArrayList<Node> isFinal = new ArrayList<>();
-        while (current.getSubtreesSize()!=0){
-            for (int i=0; i<current.getSubtreesSize(); i++){
-                aux1 = current.getSubtree(i);
-                if (aux1.isFinalLetter()) isFinal.add(aux1);
-            }
-            current=aux1;
-        }
-        String s ="";
-        for (Node node : isFinal){
-            palavra.add(new Palavra(node.getWord(),node.getSignificado()));
-        }
+        Node current = findWord(prefix);
 
+        searchAllAux(current ,palavra);
         return palavra;
     }
 
     private Node findWord(String word){
         char [] palavra = word.toCharArray();
-        Node aux = root;
-        for (int i = 1; i<aux.getSubtreesSize();i++){
-            if (aux.getSubtree(i).element!=palavra[i]) break;
-            aux = aux.getSubtree(i);
-            i++;
+        Node current = root;
+        Node aux =new Node('-');
+        boolean find = false;
+        while (!find){
+            for (int i=0; i<current.getSubtreesSize(); i++){
+                for (int j=0; j<palavra.length;j++){
+                    if(current.getSubtree(i).element==palavra[j]){
+                        aux = current.getSubtree(i);
+                        find = true;
+                    }
+                }
+
+            }
+            if (!find) {
+                aux=root; break;
+            }
         }
         return aux;
     }
-//
-//    @Override
-//    public String toString() {
-//        Node current = root;
-//        Node aux= new Node('-');
-//        ArrayList<Node> isFinal = new ArrayList<>();
-//        while (current.getSubtreesSize()!=0){
-//            for (int i=0; i<current.getSubtreesSize(); i++){
-//                aux = current.getSubtree(i);
-//                if (aux.isFinalLetter()) isFinal.add(aux);
-//            }
-//            current=aux;
-//        }
-//        String palavra = "";
-//        ArrayList<Palavra> word = new ArrayList<>();
-//        for (Node node : isFinal){
-//            word.add(new Palavra(node.getWord(),node.getSignificado()));
-//            palavra+=node.getWord();
-//        }
-//
-//        for (Palavra p : word){
-//            palavra += p.getPalavra() +"\n";
-//        }
-//
-//        return palavra;
-//    }
 
     private void addSignificado(Character elem, Node father, String significado){
         Node n = new Node (elem);

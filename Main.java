@@ -40,8 +40,8 @@ public class Main {
 //        System.out.println("Caminhamento em largura:");
 //        System.out.println(lista.positionsWidth());
 //
-//        System.out.println("Caminhamento pré-fixado:");
-//        System.out.println(lista.positionsPre());
+        System.out.println("Caminhamento pré-fixado:");
+        System.out.println(lista.positionsPre());
 //
 //        System.out.println("Caminhamento pós-fixado:");
 //        System.out.println(lista.positionsPos());
