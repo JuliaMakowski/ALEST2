@@ -20,7 +20,7 @@ public class Main {
             System.out.println("Digite as letras iniciais: (Entre 2 a 3 letras)");
             letras = in.next();
         }while (letras.length()-1>2 || letras.length()-1<1);
-        ArrayList<Palavra> listaPalavra = lista.searchAll(in.next());
+        ArrayList<Palavra> listaPalavra = lista.searchAll(letras);
 
         for (Palavra palavra : listaPalavra) {
             System.out.println(palavra.getPalavra());

@@ -122,8 +122,10 @@ public class GeneralTree {
                 }
                 totalNodes++;
             }
-        }else{
+        }else {
             char [] palavra = word.toCharArray();
+            aux = root.addChild(palavra[0]);
+            aux.father = root;
             CharNode aux1 = aux;
             for(int i=1;i< palavra.length && aux!=null;i++){
                 if(i==palavra.length-1){
@@ -183,7 +185,7 @@ public class GeneralTree {
      */
     public ArrayList<Palavra> searchAll(String prefix) {
         ArrayList<Palavra> list = new ArrayList<>();
-        CharNode aux = findCharNodeForWord(prefix);
+        CharNode aux = findLastCharNodeForWord(prefix);
         if(aux == null){
             return null;
         }

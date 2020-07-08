@@ -77,22 +77,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="535" y="131" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1594148905800" />
-    <state width="1495" height="252" key="GridCell.Tab.0.bottom" timestamp="1594249674048">
+    <state width="1495" height="252" key="GridCell.Tab.0.bottom" timestamp="1594250230579">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="252" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1594249674048" />
-    <state width="1495" height="252" key="GridCell.Tab.0.center" timestamp="1594249674047">
+    <state width="1495" height="252" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1594250230579" />
+    <state width="1495" height="252" key="GridCell.Tab.0.center" timestamp="1594250230579">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="252" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1594249674047" />
-    <state width="1495" height="252" key="GridCell.Tab.0.left" timestamp="1594249674047">
+    <state width="1495" height="252" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1594250230579" />
+    <state width="1495" height="252" key="GridCell.Tab.0.left" timestamp="1594250230578">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="252" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1594249674047" />
-    <state width="1495" height="252" key="GridCell.Tab.0.right" timestamp="1594249674048">
+    <state width="1495" height="252" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1594250230578" />
+    <state width="1495" height="252" key="GridCell.Tab.0.right" timestamp="1594250230579">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="252" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1594249674048" />
+    <state width="1495" height="252" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1594250230579" />
     <state width="1495" height="288" key="GridCell.Tab.1.bottom" timestamp="1594238682119">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -129,6 +129,17 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1593725749337" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Queue.java</url>
+          <line>10</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/ALEST2$Main.ic" NAME="Main Coverage Results" MODIFIED="1594229137715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
